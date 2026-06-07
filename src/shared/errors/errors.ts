@@ -47,33 +47,33 @@ export const validationError = (message: string, details?: unknown) => {
   });
 };
 
-export const unauthorizedError = () => {
+export const unauthorizedError = (message?: string) => {
   return createAppError({
-    message: 'Unauthorized',
+    message: message ?? 'Unauthorized',
     statusCode: 401,
     code: 'UNAUTHORIZED',
   });
 };
 
-export const forbiddenError = () => {
+export const forbiddenError = (message?: string) => {
   return createAppError({
-    message: 'Forbidden',
+    message: message ?? 'Forbidden',
     statusCode: 403,
     code: 'FORBIDDEN',
   });
 };
 
-export const notFoundError = () => {
+export const notFoundError = (message?: string) => {
   return createAppError({
-    message: 'Not Found',
+    message: message ?? 'Not Found',
     statusCode: 404,
     code: 'NOT_FOUND',
   });
 };
 
-export const conflictError = () => {
+export const conflictError = (message?: string) => {
   return createAppError({
-    message: 'Conflict',
+    message: message ?? 'Conflict',
     statusCode: 409,
     code: 'CONFLICT',
   });
