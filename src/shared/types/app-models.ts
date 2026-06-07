@@ -1,23 +1,12 @@
-export enum WorkspaceRole {
-  ADMIN = 'ADMIN',
-  MEMBER = 'MEMBER',
-}
+export type WorkspaceRole = 'ADMIN' | 'MEMBER';
 
-export enum AssetType {
-  LAPTOP = 'LAPTOP',
-  MONITOR = 'MONITOR',
-  KEYBOARD = 'KEYBOARD',
-  MOUSE = 'MOUSE',
-  HEADPHONE = 'HEADPHONE',
-  OTHER = 'OTHER',
-}
+export type AssetType = 'LAPTOP' | 'MONITOR' | 'ACCESSORY' | 'OTHER';
 
-export enum AssetStatus {
-  IN_STORAGE = 'IN_STORAGE',
-  ASSIGNED = 'ASSIGNED',
-  UNDER_REPAIR = 'UNDER_REPAIR',
-  RETIRED = 'RETIRED',
-}
+export type AssetStatus =
+  | 'IN_STORAGE'
+  | 'ASSIGNED'
+  | 'UNDER_REPAIR'
+  | 'RETIRED';
 
 export type User = {
   id: string;

@@ -1,6 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
 import { RegisterInput } from './auth.schema.js';
 import { authService } from './auth.service.js';
+import { sendSuccessResponse } from '../../shared/utils/response.js';
 
 export class AuthController {
   async register(req: Request, res: Response, next: NextFunction) {
@@ -13,7 +14,9 @@ export class AuthController {
       // Establish session
       req.session.userId = user.id;
 
-      res.status(201).json({
+      sendSuccessResponse({
+        res,
+        status: 201,
         data: user,
       });
     } catch (error) {

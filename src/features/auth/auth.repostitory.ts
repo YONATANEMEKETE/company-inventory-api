@@ -17,9 +17,35 @@ export class AuthRepository {
   }
 
   // NOTE: create user
-  async create(data: { email: string; passwordHash: string }): Promise<User> {
-    return prisma.user.create({
-      data,
+  async registerNewUser(data: {
+    email: string;
+    passwordHash: string;
+    workspaceName: string;
+  }): Promise<User> {
+    // NOTE: transaction
+    return prisma.$transaction(async (tx) => {
+      const user = await tx.user.create({
+        data: {
+          email: data.email,
+          passwordHash: data.passwordHash,
+        },
+      });
+
+      const workspace = await tx.workspace.create({
+        data: {
+          name: data.workspaceName,
+        },
+      });
+
+      await tx.workspaceMember.create({
+        data: {
+          workspaceId: workspace.id,
+          userId: user.id,
+          role: 'ADMIN',
+        },
+      });
+
+      return user;
     });
   }
 }
