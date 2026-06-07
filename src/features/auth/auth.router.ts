@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { validate } from '../../shared/middlewares/validate.js';
 import { loginSchema, registerSchema } from './auth.schema.js';
 import { authController } from './auth.controller.js';
+import { requireAuth } from '../../shared/middlewares/require-auth.js';
 
 export const authRouter = Router();
 
@@ -17,4 +18,11 @@ authRouter.post(
   '/login',
   validate({ body: loginSchema }),
   authController.login.bind(authController),
+);
+
+// NOTE: logout route
+authRouter.post(
+  '/logout',
+  requireAuth,
+  authController.logout.bind(authController),
 );
