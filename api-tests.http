@@ -85,7 +85,7 @@ Content-Type: application/json
 ###
 
 ### Register a second independent company (for cross-tenant isolation tests later)
-# @name registerStark
+# @name register-yoni-pasttech
 POST {{baseUrl}}/auth/register
 Content-Type: application/json
 
