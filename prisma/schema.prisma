@@ -8,3 +8,110 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// NOTE: Models 
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum AssetStatus {
+  IN_STORAGE
+  ASSIGNED
+  UNDER_REPAIR
+  RETIRED
+}
+
+enum AssetType {
+  LAPTOP
+  MONITOR
+  ACCESSORY
+  OTHER
+}
+
+model User {
+  id            String             @id @default(uuid())
+  email         String             @unique
+  passwordHash  String             @map("password_hash")
+  createdAt     DateTime           @default(now()) @map("created_at")
+  updatedAt     DateTime           @updatedAt  @map("updated_at")
+  memberships   WorkspaceMember[]
+  assignments   Asset[]            @relation("AssignedTo")
+  actionsLogged AssignmentHistory[] @relation("AssignedBy")
+
+  @@map("users")
+}
+
+model Workspace {
+  id          String             @id @default(uuid())
+  name        String
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime           @updatedAt  @map("updated_at")
+  members     WorkspaceMember[]
+  assets      Asset[]
+  historyLogs AssignmentHistory[]
+
+  @@map("workspaces")
+  @@index([id])
+}
+
+model WorkspaceMember {
+  id          String    @id @default(uuid())
+  workspaceId String    @map("workspace_id")
+  userId      String    @map("user_id")
+  role        Role      @default(MEMBER)
+  createdAt   DateTime  @default(now()) @map("created_at")
+  
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+  @@map("workspace_members")
+  @@index([userId])
+  @@index([workspaceId])
+}
+
+model Asset {
+  id           String              @id @default(uuid())
+  workspaceId  String              @map("workspace_id")
+  name         String
+  serialNumber String              @map("serial_number")
+  type         AssetType           @default(OTHER)
+  status       AssetStatus         @default(IN_STORAGE)
+  assignedToId String?             @map("assigned_to_id")
+  createdAt    DateTime            @default(now()) @map("created_at")
+  updatedAt    DateTime            @updatedAt  @map("updated_at")
+
+  workspace    Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  assignedTo   User?               @relation("AssignedTo", fields: [assignedToId], references: [id], onDelete: SetNull)
+  historyLogs  AssignmentHistory[]
+
+  @@unique([workspaceId, serialNumber]) // Serials are unique per tenant
+  @@map("assets")
+  @@index([id])
+  @@index([workspaceId])
+  @@index([assignedToId])
+}
+
+// NOTE: its a log record/history to track events related to assignment
+model AssignmentHistory {
+  id           String      @id @default(uuid())
+  workspaceId  String      @map("workspace_id")
+  assetId      String      @map("asset_id")
+  assignedToId String?     @map("assigned_to_id")
+  assignedById String      @map("assigned_by_id")
+  action       String      // "ASSIGN" or "UNASSIGN" or "REPAIR_SEND" etc.
+  notes        String?
+  createdAt    DateTime    @default(now()) @map("created_at")
+
+  workspace    Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  asset        Asset       @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assignedBy   User        @relation("AssignedBy", fields: [assignedById], references: [id])
+
+  @@map("assignment_histories")
+  @@index([id])
+  @@index([workspaceId])
+  @@index([assetId])
+  @@index([assignedToId])
+  @@index([assignedById])
+}
