@@ -56,6 +56,18 @@ export class AuthController {
       res.sendStatus(204);
     });
   }
+
+  async me(req: Request, res: Response, next: NextFunction) {
+    try {
+      sendSuccessResponse({
+        res,
+        status: 200,
+        data: req.user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const authController = new AuthController();
