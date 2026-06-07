@@ -1,0 +1,96 @@
+# =========================================================================
+# Company IT Inventory API - REST Client Test Suite
+# =========================================================================
+# Run your Express server locally (pnpm dev) before running these tests.
+# Click "Send Request" above each block in order top to bottom.
+# The REST Client extension stores your session cookie automatically.
+
+@baseUrl = http://localhost:3000
+
+
+# -------------------------------------------------------------------------
+# 1. Auth — Register
+# -------------------------------------------------------------------------
+
+### [HAPPY PATH] Register a new user + workspace (should return 201)
+# @name register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "yohanate@futuretech.com",
+  "password": "Password123!",
+  "workspaceName": "Future Tech Solutions"
+}
+
+###
+
+### [CONFLICT] Register again with the same email (expect 409 Conflict)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "yohanate@futuretech.com",
+  "password": "Password123!",
+  "workspaceName": "Past Tech"
+}
+
+###
+
+### [CONFLICT] Register with the same workspace name (expect 409 Conflict)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "newuser@example.com",
+  "password": "Password123!",
+  "workspaceName": "Future Tech Solutions"
+}
+
+###
+
+### [VALIDATION] Missing workspaceName (expect 400 Validation Error)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "someone@example.com",
+  "password": "Password123!"
+}
+
+###
+
+### [VALIDATION] Password too short, invalid email (expect 400 Validation Error)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "not-an-email",
+  "password": "short",
+  "workspaceName": "Test Corp"
+}
+
+###
+
+### [VALIDATION] workspaceName exceeds 50 characters (expect 400 Validation Error)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "valid@example.com",
+  "password": "Password123!",
+  "workspaceName": "This Workspace Name Is Way Too Long And Should Fail Validation"
+}
+
+###
+
+### Register a second independent company (for cross-tenant isolation tests later)
+# @name registerStark
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "yoni@pasttech.com",
+  "password": "Password123!",
+  "workspaceName": "Past Tech"
+}
