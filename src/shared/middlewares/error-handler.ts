@@ -3,7 +3,7 @@ import { ZodError } from 'zod';
 import { isAppError } from '../errors/errors.js';
 import { sendErrorResponse } from '../utils/response.js';
 
-export const errorhandler: ErrorRequestHandler = (err, req, res, next) => {
+export const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err instanceof ZodError) {
     const details = err.issues.map((issue) => ({
       field: issue.path.join('.'),
