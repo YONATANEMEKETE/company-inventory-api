@@ -9,7 +9,7 @@
 
 
 # -------------------------------------------------------------------------
-# 1. Auth — Register
+# 1. NOTE: Auth — Register
 # -------------------------------------------------------------------------
 
 ### [HAPPY PATH] Register a new user + workspace (should return 201)
@@ -94,3 +94,105 @@ Content-Type: application/json
   "password": "Password123!",
   "workspaceName": "Past Tech"
 }
+
+# -------------------------------------------------------------------------
+# 2. NOTE: Auth — Login
+# -------------------------------------------------------------------------
+# ⚠ Login must be tested AFTER register (user must exist in DB).
+
+### [HAPPY PATH] Login with correct credentials (expect 200)
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "yohanate@futuretech.com",
+  "password": "Password123!"
+}
+
+###
+
+### [VALIDATION] Login with wrong password (expect 401)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "yohanate@futuretech.com",
+  "password": "WrongPassword1!"
+}
+
+###
+
+### [VALIDATION] Login with non-existent email (expect 401)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "nobody@example.com",
+  "password": "Password123!"
+}
+
+###
+
+### [VALIDATION] Login missing password field (expect 400)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "yohanate@futuretech.com"
+}
+
+###
+
+### [VALIDATION] Login missing email field (expect 400)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "password": "Password123!"
+}
+
+###
+
+### [VALIDATION] Login with empty body (expect 400)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{}
+
+###
+
+### [VALIDATION] Login with invalid email format (expect 400)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "not-an-email",
+  "password": "Password123!"
+}
+
+# -------------------------------------------------------------------------
+# 3. NOTE: Auth — Get Current User (/me)
+# -------------------------------------------------------------------------
+# ⚠ /me depends on an active session. Run the happy-path login above first.
+
+### [HAPPY PATH] Get current user while logged in (expect 200)
+GET {{baseUrl}}/auth/me
+
+###
+
+### [AUTH] Get /me without being logged in (expect 401)
+GET {{baseUrl}}/auth/me
+
+# -------------------------------------------------------------------------
+# 4. NOTE: Auth — Logout
+# -------------------------------------------------------------------------
+# ⚠ Logout depends on an active session. Re-run happy-path login first.
+
+### [HAPPY PATH] Logout current session (expect 204)
+POST {{baseUrl}}/auth/logout
+
+###
+
+### [AUTH] Logout without being logged in (expect 401)
+POST {{baseUrl}}/auth/logout

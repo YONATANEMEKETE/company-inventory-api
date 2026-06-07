@@ -24,14 +24,3 @@ export const deserializeUser = async (
 
   next();
 };
-
-export function requireAuth(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-): void {
-  if (!req.user) {
-    throw unauthorizedError('You must be logged in first');
-  }
-  next();
-}

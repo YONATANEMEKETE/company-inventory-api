@@ -26,3 +26,6 @@ authRouter.post(
   requireAuth,
   authController.logout.bind(authController),
 );
+
+// NOTE: get current user route
+authRouter.get('/me', requireAuth, authController.me.bind(authController));

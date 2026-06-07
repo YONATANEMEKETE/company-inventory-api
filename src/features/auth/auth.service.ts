@@ -18,6 +18,15 @@ export class AuthService {
       throw conflictError('Email is already registered');
     }
 
+    // check duplicate workspace name
+    const workspaceExists = await workspaceRepository.findByName(
+      input.workspaceName,
+    );
+
+    if (workspaceExists) {
+      throw conflictError('Workspace name is already taken');
+    }
+
     // 2. Hash the password
     const passwordHash = await hashPassword(input.password);
 
