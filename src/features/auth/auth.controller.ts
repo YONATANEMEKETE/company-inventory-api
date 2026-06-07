@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from 'express';
-import { RegisterInput } from './auth.schema.js';
+import { LoginInput, RegisterInput } from './auth.schema.js';
 import { authService } from './auth.service.js';
 import { sendSuccessResponse } from '../../shared/utils/response.js';
 
@@ -10,6 +10,7 @@ export class AuthController {
       const validatedData = req.body as RegisterInput;
 
       const user = await authService.register(validatedData);
+      req.log.info({ user }, `User ${user.id} registered successfully`);
 
       // Establish session
       req.session.userId = user.id;
@@ -17,6 +18,25 @@ export class AuthController {
       sendSuccessResponse({
         res,
         status: 201,
+        data: user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  // login controller
+  async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const validatedData = req.body as LoginInput;
+      const user = await authService.login(validatedData);
+      req.log.info({ user }, `User ${user.id} logged in successfully`);
+
+      req.session.userId = user.id;
+
+      sendSuccessResponse({
+        res,
+        status: 200,
         data: user,
       });
     } catch (error) {
