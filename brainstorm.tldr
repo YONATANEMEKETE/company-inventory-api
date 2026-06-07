@@ -130,9 +130,9 @@
 			"typeName": "shape"
 		},
 		{
-			"x": -127.94022925106104,
-			"y": -79.78116060233437,
-			"z": 0.81,
+			"x": -127.8139144792733,
+			"y": -344.53711766582165,
+			"z": 0.575741543189623,
 			"meta": {},
 			"id": "camera:page:page",
 			"typeName": "camera"
@@ -288,12 +288,49 @@
 			"typeName": "shape"
 		},
 		{
-			"editingShapeId": "shape:V7xTtSOuUlccEhnrvUfo0",
+			"x": 372.81703436646717,
+			"y": 1186.0141455063406,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:8YN2O0RlJ2-RtcSjd37xd",
+			"type": "geo",
+			"props": {
+				"w": 1618.158298162333,
+				"h": 265.7486019916919,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aEp8EnEV",
+			"typeName": "shape"
+		},
+		{
+			"editingShapeId": "shape:fzCqyzLB3vStpdDQSoO1c",
 			"croppingShapeId": null,
 			"selectedShapeIds": [
-				"shape:V7xTtSOuUlccEhnrvUfo0"
+				"shape:fzCqyzLB3vStpdDQSoO1c"
 			],
-			"hoveredShapeId": "shape:V7xTtSOuUlccEhnrvUfo0",
+			"hoveredShapeId": "shape:8YN2O0RlJ2-RtcSjd37xd",
 			"erasingShapeIds": [],
 			"hintingShapeIds": [],
 			"focusedGroupId": null,
@@ -384,6 +421,171 @@
 			},
 			"parentId": "page:page",
 			"index": "a3nyVmIV",
+			"typeName": "shape"
+		},
+		{
+			"x": 417.6492290928619,
+			"y": 1214.941208392097,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:fzCqyzLB3vStpdDQSoO1c",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 1416.5617235829757,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": false,
+				"scale": 1.0464850808306498,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "paragraph",
+							"attrs": {
+								"dir": "auto"
+							},
+							"content": [
+								{
+									"type": "text",
+									"text": "Workspace routes | \"/workspaces\""
+								}
+							]
+						},
+						{
+							"type": "orderedList",
+							"attrs": {
+								"dir": "auto",
+								"start": 1,
+								"type": null
+							},
+							"content": [
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "\"/workspaceId\" | delete workspace | requires both memeber and role | admin"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "\"/workspaceId\" | update workspace | requires both member and role | amdin"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "\"/workspaceId\" | get a  workspace by Id | only require member"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "\"/\" | get all workspaces a user is a meber in"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "create is done on user"
+												},
+												{
+													"type": "text",
+													"marks": [
+														{
+															"type": "highlight"
+														}
+													],
+													"text": " "
+												},
+												{
+													"type": "text",
+													"text": "register  "
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aDo6m4v8",
 			"typeName": "shape"
 		},
 		{
@@ -611,8 +813,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 1942.27197265625,
-				"h": 870.9119873046875
+				"w": 1315.583984375,
+				"h": 1049.471923828125
 			},
 			"insets": [
 				false,
@@ -840,6 +1042,123 @@
 			},
 			"parentId": "page:page",
 			"index": "a2gsDMyV",
+			"typeName": "shape"
+		},
+		{
+			"x": 370.21477311711465,
+			"y": 947.9944411134167,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:llUw6nIAnliAU69nd5Msj",
+			"type": "geo",
+			"props": {
+				"w": 1614.9300379822428,
+				"h": 192.22291922347438,
+				"geo": "rectangle",
+				"dash": "draw",
+				"growY": 0,
+				"url": "",
+				"scale": 1,
+				"color": "black",
+				"labelColor": "black",
+				"fill": "none",
+				"size": "m",
+				"font": "draw",
+				"align": "middle",
+				"verticalAlign": "middle",
+				"richText": {
+					"type": "doc",
+					"content": [
+						{
+							"type": "paragraph"
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aCa960dV",
+			"typeName": "shape"
+		},
+		{
+			"x": 430.42836123399286,
+			"y": 999.242685341449,
+			"rotation": 0,
+			"isLocked": false,
+			"opacity": 1,
+			"meta": {},
+			"id": "shape:jSqjDXS7ru1QX6hk6gGXV",
+			"type": "text",
+			"props": {
+				"color": "black",
+				"size": "m",
+				"w": 1416.5617235829757,
+				"font": "draw",
+				"textAlign": "start",
+				"autoSize": false,
+				"scale": 1.0464850808306498,
+				"richText": {
+					"type": "doc",
+					"attrs": {
+						"dir": "auto"
+					},
+					"content": [
+						{
+							"type": "orderedList",
+							"attrs": {
+								"dir": "auto",
+								"start": 1,
+								"type": null
+							},
+							"content": [
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "requireWorkspaceMemebership middleware for getting the the current user and workspace from a route param then attach the memebership object to req.memebership"
+												}
+											]
+										}
+									]
+								},
+								{
+									"type": "listItem",
+									"attrs": {
+										"dir": "auto"
+									},
+									"content": [
+										{
+											"type": "paragraph",
+											"attrs": {
+												"dir": "auto"
+											},
+											"content": [
+												{
+													"type": "text",
+													"text": "requireworkspaceRole middlwerae that runs after the above, and just check a role and pass or 403 check"
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"parentId": "page:page",
+			"index": "aDRitVyV",
 			"typeName": "shape"
 		},
 		{

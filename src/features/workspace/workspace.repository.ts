@@ -34,6 +34,18 @@ export class WorkspaceRepository {
       data,
     });
   }
+
+  // find a memebership by userid and workspaceid
+  async findMembership(
+    userId: string,
+    workspaceId: string,
+  ): Promise<WorkspaceMember | null> {
+    return prisma.workspaceMember.findUnique({
+      where: {
+        workspaceId_userId: { workspaceId, userId },
+      },
+    });
+  }
 }
 
 export const workspaceRepository = new WorkspaceRepository();
