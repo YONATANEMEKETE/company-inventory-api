@@ -6,6 +6,8 @@ import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 import pg from 'pg';
 import { config } from './shared/configs/env.js';
+import { authRouter } from './features/auth/auth.router.js';
+import { deserializeUser } from './shared/middlewares/deserialize-user.js';
 
 const PostgresStore = pgSession(session);
 const pool = new pg.Pool({
@@ -35,6 +37,10 @@ app.use(
     },
   }),
 );
+
+app.use(deserializeUser);
+
+app.use('/auth', authRouter);
 
 app.get('/health', (req, res) => {
   res.send('Server is running');
