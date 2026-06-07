@@ -8,6 +8,7 @@ import pg from 'pg';
 import { config } from './shared/configs/env.js';
 import { authRouter } from './features/auth/auth.router.js';
 import { deserializeUser } from './shared/middlewares/deserialize-user.js';
+import { workspaceRouter } from './features/workspace/workspace.router.js';
 
 const PostgresStore = pgSession(session);
 const pool = new pg.Pool({
@@ -41,6 +42,7 @@ app.use(
 app.use(deserializeUser);
 
 app.use('/auth', authRouter);
+app.use('/workspaces', workspaceRouter);
 
 app.get('/health', (req, res) => {
   res.send('Server is running');
